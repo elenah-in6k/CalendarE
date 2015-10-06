@@ -13,11 +13,11 @@ public class App
 		int g = 2;
 		int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
 		int zdvig = dayOfMonth-c.get(Calendar.DAY_OF_WEEK)+1;
-		int lengthMonthNow=c.get(Calendar.MONTH)+1; 
-		int lengthMonthLast=c.get(Calendar.MONTH); 
+		int lengthMonthNow=c.get(Calendar.MONTH)+1;
+		int lengthMonthLast=c.get(Calendar.MONTH);
 		int qDaysOfMonthNow=QtyDaysOfMonth(lengthMonthNow); 
-		int qDaysOfMonthLast=QtyDaysOfMonth(lengthMonthLast); 
-
+		int qDaysOfMonthLast=QtyDaysOfMonth(lengthMonthLast);
+		//System.out.println(lengthMonthNow+" "+lengthMonthLast+" "+ qDaysOfMonthNow+" "+qDaysOfMonthLast);
 		int[][] calend;
 		calend = new int [6][8];
 		calend = CalendDays (qDaysOfMonthLast, zdvig, qDaysOfMonthNow);
@@ -25,56 +25,29 @@ public class App
 	}
 
     
-	public static void PrintCalendar (int[][] calend, int dayOfMonth)	
-        {	
-		for(int i=1; i<=5; i++)
-		{
-			for(int j=1; j<=7;j++)
-			{
-				if (((i==1)&(calend[i][j]>=26)&(calend[i][j]<=31))|((i==5)&(calend[i][j]<26)))
-				{ 
-					System.out.print((char) 27 + "[37m"+""+calend[i][j]+"  "+ (char)27 + "[0m");}
-				else
-				{
-					if (((j==6)|(j==7))&(calend[i][j]!=dayOfMonth))
-					{
-						if ((calend[i][j]<=9)&(calend[i][j]>=1))
-						{
-							System.out.print((char) 27 + "[31m"+calend[i][j]+"   "); 
-						}
-						else
-						{
-							System.out.print((char) 27 + "[31m"+""+calend[i][j]+"  ");
-						}
-					}
-					else 
-					{
-						if (calend[i][j]==dayOfMonth)
-						{
-							if ((calend[i][j]<=9)&(calend[i][j]>=1))
-							{
-								System.out.print((char) 27 + "[34m"+calend[i][j]+"   ");  
-							}
-							else
-							{
-								System.out.print((char) 27 + "[34m"+""+calend[i][j]+"  ");
-							}
-						}
-						else
-						{
-							if ((calend[i][j]<=9)&(calend[i][j]>=1))
-							{
-								System.out.print((char) 27 + "[0m"+calend[i][j]+"   "); 
-							}
-							else
-							{
-								System.out.print((char) 27 + "[0m"+""+calend[i][j]+"  ");
-							} 
-						}  
+	public static void PrintCalendar (int[][] calend, int dayOfMonth)
+	{
+		for (int i = 1; i <= 5; i++) {
+			for (int j = 1; j <= 7; j++) {
+				String space;
+				if ((calend[i][j] <= 9) & (calend[i][j] >= 1)) {
+					space = "   ";
+				}
+				else {
+					space = "  ";
+				}
+				if (((i == 1) & (calend[i][j] >= 26) & (calend[i][j] <= 31)) | ((i == 5) & (calend[i][j] < 26))) {
+					System.out.print((char) 27 + "[37m" + calend[i][j] + space + (char) 27 + "[0m");
+				} else if (((j == 6) | (j == 7)) & (calend[i][j] != dayOfMonth)) {
+					System.out.print((char) 27 + "[31m" + "" + calend[i][j] + space);
+				} else if (calend[i][j] == dayOfMonth) {
+					System.out.print((char) 27 + "[34m" + "" + calend[i][j] + space);
+				} else {
+					System.out.print((char) 27 + "[0m" + calend[i][j] + space);
 				}
 			}
+			System.out.println();
 		}
-			System.out.println();}
 	}
 
 	public static void PrintNameDaysOfWeek()
@@ -139,7 +112,7 @@ public class App
 
 	public static int QtyDaysOfMonth(int numbMonth)
 	{
-		if (numbMonth ==(1|3|5|7|8|10|12))
+		if ((numbMonth == 1) | (numbMonth ==3 )| (numbMonth ==5) | (numbMonth ==7) | (numbMonth ==8) | (numbMonth ==10 )| (numbMonth ==12))
 		{
 			return  31;}
 		else if (numbMonth == 2)
