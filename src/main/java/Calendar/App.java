@@ -30,21 +30,18 @@ public class App
 		for (int i = 1; i <= 5; i++) {
 			for (int j = 1; j <= 7; j++) {
 				String space;
-				if ((calend[i][j] <= 9) & (calend[i][j] >= 1)) {
-					space = "   ";
-				}
-				else {
-					space = "  ";
-				}
+				String colour;
+				space = ((calend[i][j] <= 9) & (calend[i][j] >= 1)) ?  "   " :   "  ";
 				if (((i == 1) & (calend[i][j] >= 26) & (calend[i][j] <= 31)) | ((i == 5) & (calend[i][j] < 26))) {
-					System.out.print((char) 27 + "[37m" + calend[i][j] + space + (char) 27 + "[0m");
+					colour = "[37m";
 				} else if (((j == 6) | (j == 7)) & (calend[i][j] != dayOfMonth)) {
-					System.out.print((char) 27 + "[31m" + "" + calend[i][j] + space);
+					colour = "[31m" ;
 				} else if (calend[i][j] == dayOfMonth) {
-					System.out.print((char) 27 + "[34m" + "" + calend[i][j] + space);
+					colour = "[34m";
 				} else {
-					System.out.print((char) 27 + "[0m" + calend[i][j] + space);
+					colour = "[0m" ;
 				}
+				System.out.print((char) 27 + colour + calend[i][j] + space);
 			}
 			System.out.println();
 		}
@@ -52,18 +49,18 @@ public class App
 
 	public static void PrintNameDaysOfWeek()
 	{
-		String[] dayOW;
-		dayOW = new String[8];
-		dayOW[1]="Mon";
-		dayOW[2]="Tue";
-		dayOW[3]="Wed";
-		dayOW[4]="Thu";
-		dayOW[5]="Fri";
-		dayOW[6]="Sut";
-		dayOW[7]="Sun";
+		String[] dayWeekName;
+		dayWeekName = new String[8];
+		dayWeekName[1]="Mon";
+		dayWeekName[2]="Tue";
+		dayWeekName[3]="Wed";
+		dayWeekName[4]="Thu";
+		dayWeekName[5]="Fri";
+		dayWeekName[6]="Sut";
+		dayWeekName[7]="Sun";
 		for(int i=1; i<=7; i++)
 		{ 
-			System.out.print((char) 27 + "[31m"+dayOW[i]+" "); 
+			System.out.print((char) 27 + "[31m"+dayWeekName[i]+" ");
 		}
         	System.out.println();
 	}
@@ -118,7 +115,7 @@ public class App
 		else if (numbMonth == 2)
 		{
 			if (((year%4==0)&(year%100!=0))||(year%400==0))
-			{   
+			{
 				return 29;
 			}
 			else
