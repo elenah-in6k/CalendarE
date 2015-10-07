@@ -8,9 +8,8 @@ public class App {
 		System.out.println("DATE: " + c.getTime());
 		int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
 		int slide = dayOfMonth-c.get(Calendar.DAY_OF_WEEK)+1;
-		int year = c.get(Calendar.YEAR);
-		int qDaysOfMonthNow=QtyDaysOfMonth(c.get(Calendar.MONTH)+1, year);
-		int qDaysOfMonthLast=QtyDaysOfMonth(c.get(Calendar.MONTH), year);
+		int qDaysOfMonthNow=QtyDaysOfMonth(c.get(Calendar.MONTH)+1,  c.get(Calendar.YEAR));
+		int qDaysOfMonthLast=QtyDaysOfMonth(c.get(Calendar.MONTH),  c.get(Calendar.YEAR));
 		int[][] calend;
 		calend = CalendarDays(qDaysOfMonthLast, slide, qDaysOfMonthNow);
 		PrintNameDaysOfWeek();
@@ -99,7 +98,7 @@ public class App {
 			colour = "[31m" ;
 		}
 		else if (day == dayOfMonth) {
-			colour = "[45;34m";
+			colour = "[1;45;34m";
 		}
 		else {
 			colour = "[0m" ;
