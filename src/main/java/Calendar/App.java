@@ -10,13 +10,13 @@ public class App
 		System.out.println("DATE: " + c.getTime());
 		PrintNameDaysOfWeek();
 
-		int g = 2;
 		int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
 		int zdvig = dayOfMonth-c.get(Calendar.DAY_OF_WEEK)+1;
+		int year = c.get(Calendar.YEAR);
 		int lengthMonthNow=c.get(Calendar.MONTH)+1;
 		int lengthMonthLast=c.get(Calendar.MONTH);
-		int qDaysOfMonthNow=QtyDaysOfMonth(lengthMonthNow); 
-		int qDaysOfMonthLast=QtyDaysOfMonth(lengthMonthLast);
+		int qDaysOfMonthNow=QtyDaysOfMonth(lengthMonthNow, year);
+		int qDaysOfMonthLast=QtyDaysOfMonth(lengthMonthLast, year);
 		//System.out.println(lengthMonthNow+" "+lengthMonthLast+" "+ qDaysOfMonthNow+" "+qDaysOfMonthLast);
 		int[][] calend;
 		calend = new int [6][8];
@@ -110,14 +110,22 @@ public class App
 	}
 
 
-	public static int QtyDaysOfMonth(int numbMonth)
+	public static int QtyDaysOfMonth(int numbMonth, int year)
 	{
 		if ((numbMonth == 1) | (numbMonth ==3 )| (numbMonth ==5) | (numbMonth ==7) | (numbMonth ==8) | (numbMonth ==10 )| (numbMonth ==12))
 		{
 			return  31;}
 		else if (numbMonth == 2)
 		{
-			return  28;}
+			if (((year%4==0)&(year%100!=0))||(year%400==0))
+			{   
+				return 29;
+			}
+			else
+			{
+				return  28;
+			}
+		}
 		else 
 		{
 			return  30;}
