@@ -1,9 +1,12 @@
 package Calendar;
 
+import java.io.*;
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.text.DateFormatSymbols;
 import java.util.Locale;
 import java.lang.String;
+import java.util.Scanner;
 
 public class App {
     public static int weekSize = 7;
@@ -30,7 +33,7 @@ public class App {
     public static String boldText = (char) 27 + "[1m";
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Calendar c = Calendar.getInstance();
         System.out.println("DATE: " + c.getTime());
         int dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
@@ -41,6 +44,7 @@ public class App {
         int[][] monthCalendar = calendarDays(previousMonthSize, firstDayOffset, currentMonthSize);
         printCalendarHeader();
         printCalendarBody(monthCalendar, dayOfMonth, previousMonthSize);
+        saveInFile();
     }
 
     public static String[]  getDayWeekName ()    {
@@ -60,14 +64,6 @@ public class App {
            color =  redText;
         }
         return color;
-    }
-    public static void printCalendarHeader() {
-        String[] dayWeekName = getDayWeekName ();
-        for (int i = 1; i <=weekSize; i++) {
-            System.out.print( getColorHeader(i) );
-            System.out.format("%4s", dayWeekName[i]);
-        }
-        System.out.println();
     }
 
     public static int[][] getPreviousMonthDay(int[][] monthCalendar, int firstDayOffset, int previousMonthSize ){
@@ -118,6 +114,15 @@ public class App {
             System.out.println();
         }
     }
+
+    public static void printCalendarHeader() {
+        String[] dayWeekName = getDayWeekName ();
+        for (int i = 1; i <=weekSize; i++) {
+            System.out.print( getColorHeader(i) );
+            System.out.format("%4s", dayWeekName[i]);
+        }
+        System.out.println();
+    }
     public static String getColourBody(int day, int i, int j, int dayOfMonth, int previousMonthSize) {
         String colour;
         if (((i == 0) & (day >= weekSize) & (day <= previousMonthSize)) | ((i == qtyMonthWeek - 1) & (day < weekSize))) {
@@ -131,4 +136,53 @@ public class App {
         }
         return colour;
     }
+
+    public static void printCalendarHeaderInHTML() {
+        String[] dayWeekName = getDayWeekName ();
+        for (int i = 1; i <=weekSize; i++) {
+            System.out.print( getColorHeaderHTML(i) );
+            System.out.format("%4s", dayWeekName[i]);
+        }
+        System.out.println();
+    }
+    public static String getColourBodyInHNML(int day, int i, int j, int dayOfMonth, int previousMonthSize) {
+        String colour;
+        if (((i == 0) & (day >= weekSize) & (day <= previousMonthSize)) | ((i == qtyMonthWeek - 1) & (day < weekSize))) {
+            colour = whiteText;
+        } else if (((j == nSut) | (j == nSun)) & (day != dayOfMonth)) {
+            colour = redText;
+        } else if (day == dayOfMonth) {
+            colour = boldText + redBackground + blackText;
+        } else {
+            colour = blackText;
+        }
+        return colour;
+}
+    public static String getColorHeaderHTML(int i){
+        String color;
+        color =   "#000000";
+        if ( ( i <=workWeekSize)) {
+            color =" #FF0000";
+        }
+        return color;
+    }
+    public static void saveInFile() throws FileNotFoundException {
+
+        PrintWriter out = new  PrintWriter (new File("Calendar.HTML"));
+        out.printf( "<HTML> <HEAD> <TITLE>Calendar</TITLE> </HEAD> <BODY>");
+        out.printf( "<font color=");
+
+        out.printf( ">");
+
+        out.printf( "</font>");
+        String[] dayWeekName = getDayWeekName ();
+        for (int i = 1; i <=weekSize; i++) {
+            out.printf("%4s", dayWeekName[i]);
+
+        }
+      out.println();
+        out.printf( "</BODY> </HTML>") ;
+ out.close();
+    }
+
 }
