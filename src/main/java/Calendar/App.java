@@ -6,12 +6,11 @@ import java.util.Calendar;
 import java.text.DateFormatSymbols;
 import java.util.Locale;
 import java.lang.String;
-import java.util.Scanner;
 
 public class App {
     public static int weekSize = 7;
     public static int workWeekSize = 5;
-    public static int qtyMonthWeek = 5;
+    public static int monthWeekNumber = 5;
     public static int nSut = 5;
     public static int nSun = 6;
     public static String blackText = (char) 27 + "[30m";
@@ -59,9 +58,9 @@ public class App {
     }
     public static String getColorHeader(int i){
         String color;
-        color = blackText;
+        color = redText;
         if ( ( i <=workWeekSize)) {
-           color =  redText;
+           color =  blackText;
         }
         return color;
     }
@@ -81,7 +80,7 @@ public class App {
         return monthCalendar;
     }
     public static int[][] getElseMonthDay(int[][] monthCalendar, int currentMonthSize){
-        for (int i = 1; i < qtyMonthWeek; i++) {
+        for (int i = 1; i < monthWeekNumber; i++) {
             for (int j = 0; j < weekSize; j++) {
                 if (j != 0) {
                     if ((monthCalendar[i][j - 1] == currentMonthSize) | (monthCalendar[i - 1][weekSize - 1] == currentMonthSize)) {
@@ -98,7 +97,7 @@ public class App {
     }
     public static int[][] calendarDays(int previousMonthSize, int firstDayOffset, int currentMonthSize) {
         int[][] monthCalendar;
-        monthCalendar = new int[qtyMonthWeek][weekSize];
+        monthCalendar = new int[monthWeekNumber][weekSize];
         monthCalendar = getPreviousMonthDay( monthCalendar,  firstDayOffset,  previousMonthSize );
         monthCalendar = getCurrentMonthFirstWeekDay(monthCalendar,  firstDayOffset);
         monthCalendar = getElseMonthDay(monthCalendar, currentMonthSize);
@@ -106,7 +105,7 @@ public class App {
     }
 
     public static void printCalendarBody(int[][] monthCalendar, int dayOfMonth, int previousMonthSize) {
-        for (int i = 0; i < qtyMonthWeek; i++) {
+        for (int i = 0; i < monthWeekNumber; i++) {
             for (int j = 0; j < weekSize; j++) {
                 System.out.print(getColourBody(monthCalendar[i][j], i, j, dayOfMonth, previousMonthSize));
                 System.out.format("%4d", monthCalendar[i][j]);
@@ -125,7 +124,7 @@ public class App {
     }
     public static String getColourBody(int day, int i, int j, int dayOfMonth, int previousMonthSize) {
         String colour;
-        if (((i == 0) & (day >= weekSize) & (day <= previousMonthSize)) | ((i == qtyMonthWeek - 1) & (day < weekSize))) {
+        if (((i == 0) & (day >= weekSize) & (day <= previousMonthSize)) | ((i == monthWeekNumber - 1) & (day < weekSize))) {
             colour = whiteText;
         } else if (((j == nSut) | (j == nSun)) & (day != dayOfMonth)) {
             colour = redText;
@@ -145,9 +144,9 @@ public class App {
         }
         System.out.println();
     }
-    public static String getColourBodyInHNML(int day, int i, int j, int dayOfMonth, int previousMonthSize) {
+    public static String getColourBodyInHTML(int day, int i, int j, int dayOfMonth, int previousMonthSize) {
         String colour;
-        if (((i == 0) & (day >= weekSize) & (day <= previousMonthSize)) | ((i == qtyMonthWeek - 1) & (day < weekSize))) {
+        if (((i == 0) & (day >= weekSize) & (day <= previousMonthSize)) | ((i == monthWeekNumber - 1) & (day < weekSize))) {
             colour = whiteText;
         } else if (((j == nSut) | (j == nSun)) & (day != dayOfMonth)) {
             colour = redText;
