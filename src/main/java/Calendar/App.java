@@ -53,16 +53,19 @@ public class App {
         }
         return dayWeekName;
     }
-
+    public static String getColorHeader(int i){
+        String color;
+        color = blackText;
+        if (( i == 1) & ( i <=workWeekSize)) {
+           color =  redText;
+        }
+        return color;
+    }
     public static void printCalendarHeader() {
         String[] dayWeekName = getDayWeekName ();
-        for (int i = 1; i <=workWeekSize; i++) {
-            System.out.print(redText  );
-            System.out.format("%4s", dayWeekName[i]) ; //set sut sun else color
-        }
-        for (int i = workWeekSize+1; i <=weekSize ; i++) {
-            System.out.print(blackText );
-            System.out.format("%4s", dayWeekName[i]) ; //set sut sun else color
+        for (int i = 1; i <=weekSize; i++) {
+            System.out.print( getColorHeader(i) );
+            System.out.format("%4s", dayWeekName[i]);
         }
         System.out.println();
     }
@@ -81,11 +84,7 @@ public class App {
         }
         return monthCalendar;
     }
-    public static int[][] calendarDays(int previousMonthSize, int firstDayOffset, int currentMonthSize) {
-        int[][] monthCalendar;
-        monthCalendar = new int[qtyMonthWeek][weekSize];
-        monthCalendar = getPreviousMonthDay( monthCalendar,  firstDayOffset,  previousMonthSize );
-        monthCalendar = getCurrentMonthFirstWeekDay(monthCalendar,  firstDayOffset);
+    public static int[][] getElseMonthDay(int[][] monthCalendar, int currentMonthSize){
         for (int i = 1; i < qtyMonthWeek; i++) {
             for (int j = 0; j < weekSize; j++) {
                 if (j != 0) {
@@ -101,18 +100,25 @@ public class App {
         }
         return monthCalendar;
     }
+    public static int[][] calendarDays(int previousMonthSize, int firstDayOffset, int currentMonthSize) {
+        int[][] monthCalendar;
+        monthCalendar = new int[qtyMonthWeek][weekSize];
+        monthCalendar = getPreviousMonthDay( monthCalendar,  firstDayOffset,  previousMonthSize );
+        monthCalendar = getCurrentMonthFirstWeekDay(monthCalendar,  firstDayOffset);
+        monthCalendar = getElseMonthDay(monthCalendar, currentMonthSize);
+        return monthCalendar;
+    }
 
     public static void printCalendarBody(int[][] monthCalendar, int dayOfMonth, int previousMonthSize) {
         for (int i = 0; i < qtyMonthWeek; i++) {
             for (int j = 0; j < weekSize; j++) {
-                System.out.print(getColour(monthCalendar[i][j], i, j, dayOfMonth, previousMonthSize));
+                System.out.print(getColourBody(monthCalendar[i][j], i, j, dayOfMonth, previousMonthSize));
                 System.out.format("%4d", monthCalendar[i][j]);
             }
             System.out.println();
         }
     }
-
-    public static String getColour(int day, int i, int j, int dayOfMonth, int previousMonthSize) {
+    public static String getColourBody(int day, int i, int j, int dayOfMonth, int previousMonthSize) {
         String colour;
         if (((i == 0) & (day >= weekSize) & (day <= previousMonthSize)) | ((i == qtyMonthWeek - 1) & (day < weekSize))) {
             colour = whiteText;
