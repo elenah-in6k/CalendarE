@@ -56,7 +56,7 @@ public class App {
     public static String getColorHeader(int i){
         String color;
         color = blackText;
-        if (( i == 1) & ( i <=workWeekSize)) {
+        if ( ( i <=workWeekSize)) {
            color =  redText;
         }
         return color;
