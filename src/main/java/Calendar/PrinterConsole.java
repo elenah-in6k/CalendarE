@@ -11,7 +11,7 @@ public class PrinterConsole extends Printer {
     public static final String blueText = (char) 27 + "[34m";
     public static final String magentaText = (char) 27 + "[35m";
     public static final String lightBlueText = (char) 27 + "[36m";
-    public static final String whiteText = (char) 27 + "[37m";
+    public static final String greyText = (char) 27 + "[37m";
     public static final String blackBackground = (char) 27 + "[40m";
     public static final String redBackground = (char) 27 + "[41m";
     public static final String greenBackground = (char) 27 + "[42m";
@@ -27,13 +27,13 @@ public class PrinterConsole extends Printer {
     public PrinterConsole(MonthCalendar monthCalendar) {
         this.monthCalendar = monthCalendar;
     }
-    public void print() {
+    public void printConsole() {
         printCalendarHeader();
         printCalendarBody();
 
     }
 
-    public String getColorHeader(int dayOfWeek) {
+    private String getColorHeader(int dayOfWeek) {
         return ((dayOfWeek <= MonthCalendar.workWeekSize)) ? blackText : redText;
     }
 
@@ -47,7 +47,7 @@ public class PrinterConsole extends Printer {
         }
     }
 
-    public void printCalendarHeader() {
+    private void printCalendarHeader() {
 
         for (int i = 1; i <= MonthCalendar.weekSize; i++) {
             System.out.print(getColorHeader(i));
@@ -56,12 +56,12 @@ public class PrinterConsole extends Printer {
         System.out.println();
     }
 
-    public String getColourBody(int weekNumber, int dayOfWeek) {
+    private String getColourBody(int weekNumber, int dayOfWeek) {
         if (monthCalendar.isOutOfMonth(weekNumber, dayOfWeek)) {
-            return whiteText;
+            return greyText;
         }
 
-        if (isWeekend(dayOfWeek) & !monthCalendar.isCurrentDay(weekNumber, dayOfWeek)) {
+        if (monthCalendar.isWeekend(dayOfWeek) & !monthCalendar.isCurrentDay(weekNumber, dayOfWeek)) {
             return redText;
         }
 
@@ -72,9 +72,7 @@ public class PrinterConsole extends Printer {
         return blackText;
     }
 
-    private boolean isWeekend(int dayOfWeek) {
-        return (dayOfWeek == saturdayIndex) | (dayOfWeek == sundayIndex);
-    }
+
 
 
 

@@ -11,6 +11,8 @@ public class MonthCalendar {
     public static final int weekSize = 7;
     public static final int workWeekSize = 5;
     public static final int monthWeekNumber = 5;
+    public static final int saturdayIndex = 5;
+    public static final int sundayIndex = 6;
     int currentDayOfMonth;
     int[][] daysOfMonth = new int[workWeekSize][weekSize];
     int previousMonthLastDayOfWeek;
@@ -26,7 +28,7 @@ public class MonthCalendar {
 
     private MonthCalendar getCurrentDateInfo(MonthCalendar calendarDays) {
         Calendar c = Calendar.getInstance();
-        System.out.println("DATE: " + c.getTime());
+
         calendarDays.currentDayOfMonth = c.get(Calendar.DAY_OF_MONTH);
         calendarDays.previousMonthLastDayOfWeek = calendarDays.currentDayOfMonth - c.get(Calendar.DAY_OF_WEEK);
         calendarDays.currentMonthSize = c.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -93,5 +95,8 @@ public class MonthCalendar {
 
     public boolean isCurrentDay(int weekNumber, int dayOfWeek) {
         return daysOfMonth[weekNumber][dayOfWeek] == currentDayOfMonth;
+    }
+    public boolean isWeekend(int dayOfWeek) {
+        return (dayOfWeek == saturdayIndex) | (dayOfWeek == sundayIndex);
     }
 }
