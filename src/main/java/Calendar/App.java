@@ -7,13 +7,11 @@ public class App {
 
 
     public static void main(String[] args) throws NullPointerException {
-        MonthCalendar Cal=new MonthCalendar().getCurrentMonthCalendar();
-        PrinterConsole.printCalendarHeader(Cal);
-        PrinterConsole.printCalendarBody(Cal);
-        //PrinterHTML.saveInFile();
+        MonthCalendar cal = new MonthCalendar();
+        PrinterConsole pc = new PrinterConsole(cal);
+        pc.print();
+
     }
-
-
 
 
 }
