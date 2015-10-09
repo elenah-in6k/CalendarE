@@ -8,8 +8,8 @@ public class App {
 
 
     public static void main(String[] args) throws NullPointerException {
-
-        Printer.printer();
+    Printer printer = new Printer();
+        printer.printer();
 
     }
 

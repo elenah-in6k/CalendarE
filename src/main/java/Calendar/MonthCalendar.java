@@ -56,35 +56,35 @@ public class MonthCalendar {
 
     }
 
-    public MonthCalendar fillByCurrentMonthFirstWeekDays(MonthCalendar c) {
-        c.daysOfMonth[0][c.previousMonthLastDayOfWeek] = 1;
-        for (int i = c.previousMonthLastDayOfWeek + 1; i < weekSize; i++) {
-            c.daysOfMonth[0][i] = c.daysOfMonth[0][i - 1] + 1;
+    public void fillByCurrentMonthFirstWeekDays() {
+        daysOfMonth[0][previousMonthLastDayOfWeek] = 1;
+        for (int i = previousMonthLastDayOfWeek + 1; i < weekSize; i++) {
+            daysOfMonth[0][i] = daysOfMonth[0][i - 1] + 1;
         }
-        return c;
+
     }
 
-    public MonthCalendar fillByElseMonthDays(MonthCalendar c) {
-        for (int i = 1; i < c.monthWeekNumber; i++) {
+    public void fillByElseMonthDays() {
+        for (int i = 1; i < monthWeekNumber; i++) {
             for (int j = 0; j < weekSize; j++) {
                 if (j != 0) {
-                    if ((c.daysOfMonth[i][j - 1] == c.currentMonthSize) | (c.daysOfMonth[i - 1][weekSize - 1] == c.currentMonthSize)) {
-                        c.daysOfMonth[i][j] = 1;
+                    if ((daysOfMonth[i][j - 1] == currentMonthSize) | (daysOfMonth[i - 1][weekSize - 1] == currentMonthSize)) {
+                        daysOfMonth[i][j] = 1;
                     } else {
-                        c.daysOfMonth[i][j] = c.daysOfMonth[i][j - 1] + 1;
+                        daysOfMonth[i][j] = daysOfMonth[i][j - 1] + 1;
                     }
                 } else {
-                    c.daysOfMonth[i][j] = c.daysOfMonth[i - 1][weekSize - 1] + 1;
+                    daysOfMonth[i][j] = daysOfMonth[i - 1][weekSize - 1] + 1;
                 }
             }
         }
-        return c;
+
     }
 
     public MonthCalendar calendarDays(MonthCalendar c) {
         fillByPreviousMonthDays();
-        c = fillByCurrentMonthFirstWeekDays(c);
-        c = fillByElseMonthDays(c);
+       fillByCurrentMonthFirstWeekDays();
+         fillByElseMonthDays();
         return c;
     }
 

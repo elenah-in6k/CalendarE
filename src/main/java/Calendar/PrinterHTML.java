@@ -1,5 +1,6 @@
 package Calendar;
 
+import java.awt.*;
 import java.io.*;
 
 /**
@@ -32,9 +33,10 @@ public class PrinterHTML extends Printer {
     }
 
     public void printHTML()  {
-           try (FileWriter out = new FileWriter("MonthCalendar.HTML", false)) {
+        File file = new File("MonthCalendar.HTML");
+           try (FileWriter out = new FileWriter(file, false)) {
                String html = " ";
-               html += "<HTML> <HEAD> <TITLE>MonthCalendar</TITLE> </HEAD> <BODY> <table style=\"width:50%\">";
+               html += "<HTML> <HEAD> <TITLE>MonthCalendar</TITLE> </HEAD> <BODY> <table style=\"width: 200px;\">";
                html += printCalendarHeaderHTML();
                html += printCalendarBodyHTML();
                html += "</table></BODY> </HTML>";
@@ -42,6 +44,7 @@ public class PrinterHTML extends Printer {
                out.append('\n');
                out.append(' ');
                html += " ";
+               Desktop.getDesktop().browse(file.toURI());
            } catch (IOException ex) {
 
                System.out.println(ex.getMessage());
