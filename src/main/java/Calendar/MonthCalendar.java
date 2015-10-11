@@ -30,9 +30,10 @@ public class MonthCalendar {
         Calendar c = Calendar.getInstance();
 
         calendarDays.currentDayOfMonth = c.get(Calendar.DAY_OF_MONTH);
-        calendarDays.previousMonthLastDayOfWeek = calendarDays.currentDayOfMonth - c.get(Calendar.DAY_OF_WEEK);
+        c.set(Calendar.DAY_OF_MONTH, 1);
+        calendarDays.previousMonthLastDayOfWeek = weekSize - c.get(Calendar.DAY_OF_WEEK);
         calendarDays.currentMonthSize = c.getActualMaximum(Calendar.DAY_OF_MONTH);
-        c.set(Calendar.MONTH, -1);
+        c.set(Calendar.MONTH, c.get(Calendar.MONTH) - 1);
         calendarDays.previousMonthSize = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         return calendarDays;
     }
@@ -49,7 +50,7 @@ public class MonthCalendar {
     }
 
     private void fillByPreviousMonthDays() {
-        daysOfMonth[0][previousMonthLastDayOfWeek] = previousMonthSize;
+        daysOfMonth[0][previousMonthLastDayOfWeek ] = previousMonthSize;
         for (int i = previousMonthLastDayOfWeek - 1; i >= 0; i--) {
             daysOfMonth[0][i] = daysOfMonth[0][i + 1] - 1;
         }
@@ -57,8 +58,8 @@ public class MonthCalendar {
     }
 
     public void fillByCurrentMonthFirstWeekDays() {
-        daysOfMonth[0][previousMonthLastDayOfWeek] = 1;
-        for (int i = previousMonthLastDayOfWeek + 1; i < weekSize; i++) {
+        daysOfMonth[0][previousMonthLastDayOfWeek + 1] = 1;
+        for (int i = previousMonthLastDayOfWeek + 2; i < weekSize; i++) {
             daysOfMonth[0][i] = daysOfMonth[0][i - 1] + 1;
         }
 
@@ -83,8 +84,8 @@ public class MonthCalendar {
 
     public MonthCalendar calendarDays(MonthCalendar c) {
         fillByPreviousMonthDays();
-       fillByCurrentMonthFirstWeekDays();
-         fillByElseMonthDays();
+        fillByCurrentMonthFirstWeekDays();
+        fillByElseMonthDays();
         return c;
     }
 
