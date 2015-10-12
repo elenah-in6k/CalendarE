@@ -26,10 +26,10 @@ public class App {
         int placeOfOutput = chooseDisplayMethod();
         MonthCalendar cal = new MonthCalendar();
         if (placeOfOutput == 1) {
-            PrinterConsole pc = new PrinterConsole(cal);
+             new PrinterConsole(cal);
 
         } else {
-            PrinterHTML ph = new PrinterHTML(cal);
+             new PrinterHTML(cal);
 
         }
     }

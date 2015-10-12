@@ -7,23 +7,21 @@ public abstract class Printer {
 
     abstract String[] color();
 
-    abstract void insideOutputHeader(String dayName, int i);
+    abstract void selectionOutputDataHeader(String dayName, int i);
 
-    abstract void insideOutputBody(MonthCalendar monthCalendar, int i);
-
-    public MonthCalendar monthCalendar;
+    abstract void selectionOutputDataBody(MonthCalendar monthCalendar, int i);
 
     void printCalendarHeader(MonthCalendar monthCalendar) {
 
         for (int i = 1; i <= MonthCalendar.weekSize; i++) {
-            insideOutputHeader(monthCalendar.dayWeekName[i], i);
+            selectionOutputDataHeader(monthCalendar.dayWeekName[i], i);
         }
     }
 
     void printCalendarBody(MonthCalendar monthCalendar) {
 
         for (int i = 0; i < MonthCalendar.monthWeekNumber; i++) {
-            insideOutputBody(monthCalendar, i);
+            selectionOutputDataBody(monthCalendar, i);
         }
     }
 

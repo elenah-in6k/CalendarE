@@ -48,6 +48,12 @@ public class MonthCalendar {
         return dayWeekName;
     }
 
+    private MonthCalendar calendarDays(MonthCalendar c) {
+        fillByPreviousMonthDays();
+        fillByCurrentMonthFirstWeekDays();
+        fillByElseMonthDays();
+        return c;
+    }
     private void fillByPreviousMonthDays() {
         daysOfMonth[0][previousMonthLastDayOfWeek] = previousMonthSize;
         for (int i = previousMonthLastDayOfWeek - 1; i >= 0; i--) {
@@ -79,13 +85,6 @@ public class MonthCalendar {
             }
         }
 
-    }
-
-    private MonthCalendar calendarDays(MonthCalendar c) {
-        fillByPreviousMonthDays();
-        fillByCurrentMonthFirstWeekDays();
-        fillByElseMonthDays();
-        return c;
     }
 
     public boolean isOutOfMonth(int weekNumber, int dayOfWeek) {

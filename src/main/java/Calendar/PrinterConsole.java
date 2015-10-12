@@ -16,18 +16,14 @@ public class PrinterConsole extends Printer {
     }
 
     @Override
-    String[] color() {
-        String[] color = new String[4];
-        color[0] = (char) 27 + "[30m"; //blackText
-        color[1] = (char) 27 + "[31m"; //redText
-        color[2] = (char) 27 + "[32m"; //greenText
-        color[3] = (char) 27 + "[37m"; //greyText
-
-        return color;
+    void selectionOutputDataHeader(String monthCalendarDay, int i) {
+        String[] color = color();
+        System.out.print(getColorHeader(i, color));
+        System.out.format("%4s", monthCalendarDay);
     }
 
     @Override
-    void insideOutputBody(MonthCalendar monthCalendar, int i) {
+    void selectionOutputDataBody(MonthCalendar monthCalendar, int i) {
         String[] color = color();
         for (int j = 0; j < MonthCalendar.weekSize; j++) {
             System.out.print(getColourBody(i, j, monthCalendar, color));
@@ -37,10 +33,14 @@ public class PrinterConsole extends Printer {
     }
 
     @Override
-    void insideOutputHeader(String monthCalendarDay, int i) {
-        String[] color = color();
-        System.out.print(getColorHeader(i, color));
-        System.out.format("%4s", monthCalendarDay);
+    String[] color() {
+        String[] color = new String[4];
+        color[0] = (char) 27 + "[30m"; //blackText
+        color[1] = (char) 27 + "[31m"; //redText
+        color[2] = (char) 27 + "[32m"; //greenText
+        color[3] = (char) 27 + "[37m"; //greyText
+
+        return color;
     }
 
 }

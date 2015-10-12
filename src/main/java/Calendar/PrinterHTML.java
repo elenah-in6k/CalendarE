@@ -45,6 +45,25 @@ public class PrinterHTML extends Printer {
         html += "       </table>\n  </BODY>\n</HTML>\n";
     }
 
+
+    @Override
+    void selectionOutputDataHeader(String monthCalendarDay, int i) {
+        String[] color = color();
+        html += "             <td>\n          " + getColorHeader(i, color) +
+                monthCalendarDay + "</font>\n" + "              </td>\n";
+    }
+
+    @Override
+    void selectionOutputDataBody(MonthCalendar monthCalendar, int i) {
+        String[] color = color();
+        html += "         <tr>\n";
+        for (int j = 0; j < MonthCalendar.weekSize; j++) {
+            html += "               <td>\n                  " + getColourBody(i, j, monthCalendar, color) +
+                    monthCalendar.daysOfMonth[i][j] + "</font>\n" + "               </td>\n";
+        }
+        html += "         </tr>\n";
+    }
+
     @Override
     String[] color() {
         String[] color = new String[4];
@@ -55,23 +74,4 @@ public class PrinterHTML extends Printer {
 
         return color;
     }
-
-    @Override
-    void insideOutputHeader(String monthCalendarDay, int i) {
-        String[] color = color();
-        html += "             <td>\n          " + getColorHeader(i, color) +
-                monthCalendarDay + "</font>\n" + "              </td>\n";
-    }
-
-    @Override
-    void insideOutputBody(MonthCalendar monthCalendar, int i) {
-        String[] color = color();
-        html += "         <tr>\n";
-        for (int j = 0; j < MonthCalendar.weekSize; j++) {
-            html += "               <td>\n                  " + getColourBody(i, j, monthCalendar, color) +
-                    monthCalendar.daysOfMonth[i][j] + "</font>\n" + "               </td>\n";
-        }
-        html += "         </tr>\n";
-    }
-
 }
