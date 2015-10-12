@@ -28,7 +28,6 @@ public class MonthCalendar {
 
     private MonthCalendar getCurrentDateInfo(MonthCalendar calendarDays) {
         Calendar c = Calendar.getInstance();
-
         calendarDays.currentDayOfMonth = c.get(Calendar.DAY_OF_MONTH);
         c.set(Calendar.DAY_OF_MONTH, 1);
         calendarDays.previousMonthLastDayOfWeek = weekSize - c.get(Calendar.DAY_OF_WEEK);

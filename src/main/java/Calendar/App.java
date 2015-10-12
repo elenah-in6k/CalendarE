@@ -1,6 +1,5 @@
 package Calendar;
 
-import java.io.FileNotFoundException;
 import java.lang.String;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -8,14 +7,13 @@ import java.util.Scanner;
 
 public class App {
 
-
     public static void main(String[] args) throws NullPointerException {
-        PrinterConsole printer = new PrinterConsole(new MonthCalendar());
-        //printer.printer();
+
         int placeOfOutput = chooseDisplayMethod();
         displaySelectedMethod(placeOfOutput);
 
     }
+
     private static int chooseDisplayMethod() {
         Scanner in = new Scanner(System.in);
         Calendar c = Calendar.getInstance();
@@ -29,10 +27,10 @@ public class App {
         MonthCalendar cal = new MonthCalendar();
         if (placeOfOutput == 1) {
             PrinterConsole pc = new PrinterConsole(cal);
-            pc.printConsole();
+
         } else {
             PrinterHTML ph = new PrinterHTML(cal);
-            ph.printHTML();
+
         }
     }
 
