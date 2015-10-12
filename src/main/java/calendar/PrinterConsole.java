@@ -1,5 +1,8 @@
 package calendar;
 
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+
 /**
  * Created by Алена on 09.10.2015.
  */
@@ -10,13 +13,20 @@ public class PrinterConsole extends Printer {
     String otherMonthColor = "[37m";
     String currentDayColor = "[32m";
     String currentMonthColor = "[30m";
-   public ColorSchema colorSchema= new ColorSchema (weekendColor, otherMonthColor, currentDayColor, currentMonthColor);
 
-    public PrinterConsole(MonthCalendar monthCalendar) {
-        this.monthCalendar = monthCalendar;
-        //PrinterConsole printer = new PrinterConsole(this.monthCalendar);
+    public ColorSchema colorSchema = new ColorSchema(weekendColor, otherMonthColor, currentDayColor, currentMonthColor);
+    private PrintStream calendarStream;
 
-        print(this.monthCalendar);
+    public  PrinterConsole(PrintStream out) {
+        PrintStream calendarStream = new PrintStream(out);
+
+
+    }
+
+    @Override
+    void output() {
+
+
 
 
     }
@@ -24,15 +34,16 @@ public class PrinterConsole extends Printer {
     @Override
     void printDayOfWeekTitle(String monthCalendarDay, int i) {
 
-        System.out.print((char) 27 +getHeaderColor(i, this.colorSchema));
-        System.out.format("%4s", monthCalendarDay);
+
+        calendarStream.print("\t" + (char) 27 + getHeaderColor(i, this.colorSchema) + monthCalendarDay);
+
 
     }
 
     @Override
     void printWeek(MonthCalendar monthCalendar, int i, int j) {
-        System.out.print((char) 27 + getBodyColor(i, j, monthCalendar, this.colorSchema));
-        System.out.format("%4d", monthCalendar.daysOfMonth[i][j]);
+        calendarStream.print("\t" + (char) 27 + getBodyColor(i, j, monthCalendar, this.colorSchema) + monthCalendar.daysOfMonth[i][j]);
+
 
     }
 
@@ -44,7 +55,17 @@ public class PrinterConsole extends Printer {
 
     @Override
     void printEndWeekSequence() {
-        System.out.println();
+        calendarStream.print("\n");
+    }
+
+    @Override
+    void openMonth() {
+
+    }
+
+    @Override
+    void closeMonth() {
+
     }
 
 

@@ -1,5 +1,9 @@
 package calendar;
 
+import calendar.PrinterConsole;
+
+import java.io.PrintStream;
+
 /**
  * Created by Алена on 09.10.2015.
  */
@@ -7,24 +11,39 @@ public abstract class Printer {
 
     public ColorSchema colorSchema;
     public MonthCalendar monthCalendar;
+    private PrintStream out;
+
+    protected Printer() {
+    }
+
+    public Printer (PrintStream out){
+        PrintStream printstream = new PrintStream(out);
+    }
 
     abstract void printDayOfWeekTitle(String dayName, int i);
 
     abstract void printWeek(MonthCalendar monthCalendar, int i, int j);
 
+    abstract void openMonth();
+
+    abstract void closeMonth();
+
     abstract void printStartWeekSequence();
 
     abstract void printEndWeekSequence();
 
-    void print(MonthCalendar monthCalendar){
+    abstract void output();
+
+    public void printCalendar(MonthCalendar monthCalendar) {
         this.monthCalendar = monthCalendar;
-        printCalendarHeader(this.monthCalendar);
-        printCalendarBody(this.monthCalendar);
+        openMonth();
+        printCalendarHeader();
+        printCalendarBody();
+        closeMonth();
+        //output();
     }
 
-
-
-    void printCalendarHeader(MonthCalendar monthCalendar) {
+    void printCalendarHeader() {
 
         for (int i = 1; i <= MonthCalendar.WEEK_SIZE; i++) {
             printDayOfWeekTitle(monthCalendar.weekdayNames[i], i);
@@ -32,7 +51,7 @@ public abstract class Printer {
         printEndWeekSequence();
     }
 
-    void printCalendarBody(MonthCalendar monthCalendar) {
+    void printCalendarBody() {
 
         for (int i = 0; i < MonthCalendar.MONTH_WEEK_NUMBER; i++) {
             printStartWeekSequence();
@@ -65,7 +84,5 @@ public abstract class Printer {
         return colorSchema.getCurrentMonthColor();
     }
 
-    public void printCalendar() {
-        print(monthCalendar);
-    }
+
 }

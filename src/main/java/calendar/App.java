@@ -1,5 +1,6 @@
 package calendar;
 
+import java.io.*;
 import java.lang.String;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -8,16 +9,21 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) throws NullPointerException {
+        try{
+            displaySelectedMethod();
+        }catch (IOException ex) {
 
-        displaySelectedMethod();
+            System.out.println(ex.getMessage());
+        }
 
     }
 
-    private static void displaySelectedMethod() {
+    private static void displaySelectedMethod() throws FileNotFoundException {
         int placeOfOutput = chooseDisplayMethod();
         MonthCalendar cal = new MonthCalendar();
-        Printer printer = placeOfOutput == 1 ? new PrinterConsole(cal) : new PrinterHTML(cal);
-        //printer.printCalendar();
+
+        Printer printer = placeOfOutput == 1 ? new PrinterConsole(System.out) : new PrinterHTML(new File("MonthCalendar.HTML"));
+        printer.printCalendar(cal);
     }
 
     private static int chooseDisplayMethod() {
@@ -25,9 +31,20 @@ public class App {
         Calendar c = Calendar.getInstance();
         System.out.println("DATE: " + c.getTime());
         System.out.println("Where to show calendar choose number of printer: \n" +
-                "#1 console \n" +
+                 "#1 console \n" +
                 "#2 html \n");
         return in.nextInt();
+    }
+
+    private static void saveCalendarInFile(String fileName, MonthCalendar calendar){
+        File file = new File(fileName);
+        try (PrintStream calendarStream = new PrintStream(file)) {
+            calendarStream.print(calendar);
+
+        } catch (IOException ex) {
+
+            System.out.println(ex.getMessage());
+        }
     }
 
 }
