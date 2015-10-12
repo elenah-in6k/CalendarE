@@ -9,8 +9,7 @@ public class App {
 
     public static void main(String[] args) throws NullPointerException {
 
-        int placeOfOutput = chooseDisplayMethod();
-        displaySelectedMethod(placeOfOutput);
+        displaySelectedMethod();
 
     }
 
@@ -23,7 +22,8 @@ public class App {
         return in.nextInt();
     }
 
-    private static   void displaySelectedMethod(int placeOfOutput) {
+    private static void displaySelectedMethod() {
+        int placeOfOutput = chooseDisplayMethod();
         MonthCalendar cal = new MonthCalendar();
         if (placeOfOutput == 1) {
             PrinterConsole pc = new PrinterConsole(cal);
