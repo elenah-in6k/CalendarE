@@ -9,8 +9,9 @@ public class PrinterConsole extends Printer {
 
     public PrinterConsole(MonthCalendar monthCalendar) {
         this.monthCalendar = monthCalendar;
-        printCalendarHeader();
-        printCalendarBody();
+        printCalendarHeader(this.monthCalendar);
+        System.out.println();
+        printCalendarBody(this.monthCalendar);
 
     }
 
@@ -26,26 +27,20 @@ public class PrinterConsole extends Printer {
     }
 
     @Override
-     void printCalendarBody() {
+    void insideOutputBody(MonthCalendar monthCalendar, int i) {
         String[] color = color();
-        for (int i = 0; i < MonthCalendar.monthWeekNumber; i++) {
-            for (int j = 0; j < MonthCalendar.weekSize; j++) {
-                System.out.print(getColourBody(i, j, monthCalendar, color));
-                System.out.format("%4d", monthCalendar.daysOfMonth[i][j]);
-            }
-            System.out.println();
-        }
-    }
-
-    @Override
-    void printCalendarHeader() {
-        String[] color = color();
-        for (int i = 1; i <= MonthCalendar.weekSize; i++) {
-            System.out.print(getColorHeader(i, color));
-            System.out.format("%4s", monthCalendar.dayWeekName[i]);
+        for (int j = 0; j < MonthCalendar.weekSize; j++) {
+            System.out.print(getColourBody(i, j, monthCalendar, color));
+            System.out.format("%4d", monthCalendar.daysOfMonth[i][j]);
         }
         System.out.println();
     }
 
+    @Override
+    void insideOutputHeader(String monthCalendarDay, int i) {
+        String[] color = color();
+        System.out.print(getColorHeader(i, color));
+        System.out.format("%4s", monthCalendarDay);
+    }
 
 }

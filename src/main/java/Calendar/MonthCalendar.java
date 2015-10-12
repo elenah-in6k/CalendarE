@@ -37,7 +37,7 @@ public class MonthCalendar {
         return calendarDays;
     }
 
-    public String[] getDayWeekName() {
+    private String[] getDayWeekName() {
         DateFormatSymbols symbols = new DateFormatSymbols(new Locale("en"));
         dayWeekName = symbols.getShortWeekdays();
         for (int i = 1; i < weekSize; i++) {
@@ -49,14 +49,14 @@ public class MonthCalendar {
     }
 
     private void fillByPreviousMonthDays() {
-        daysOfMonth[0][previousMonthLastDayOfWeek ] = previousMonthSize;
+        daysOfMonth[0][previousMonthLastDayOfWeek] = previousMonthSize;
         for (int i = previousMonthLastDayOfWeek - 1; i >= 0; i--) {
             daysOfMonth[0][i] = daysOfMonth[0][i + 1] - 1;
         }
 
     }
 
-    public void fillByCurrentMonthFirstWeekDays() {
+    private void fillByCurrentMonthFirstWeekDays() {
         daysOfMonth[0][previousMonthLastDayOfWeek + 1] = 1;
         for (int i = previousMonthLastDayOfWeek + 2; i < weekSize; i++) {
             daysOfMonth[0][i] = daysOfMonth[0][i - 1] + 1;
@@ -64,7 +64,7 @@ public class MonthCalendar {
 
     }
 
-    public void fillByElseMonthDays() {
+    private void fillByElseMonthDays() {
         for (int i = 1; i < monthWeekNumber; i++) {
             for (int j = 0; j < weekSize; j++) {
                 if (j != 0) {
@@ -81,7 +81,7 @@ public class MonthCalendar {
 
     }
 
-    public MonthCalendar calendarDays(MonthCalendar c) {
+    private MonthCalendar calendarDays(MonthCalendar c) {
         fillByPreviousMonthDays();
         fillByCurrentMonthFirstWeekDays();
         fillByElseMonthDays();
@@ -96,6 +96,7 @@ public class MonthCalendar {
     public boolean isCurrentDay(int weekNumber, int dayOfWeek) {
         return daysOfMonth[weekNumber][dayOfWeek] == currentDayOfMonth;
     }
+
     public boolean isWeekend(int dayOfWeek) {
         return (dayOfWeek == saturdayIndex) | (dayOfWeek == sundayIndex);
     }
