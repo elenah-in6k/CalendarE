@@ -29,7 +29,6 @@ public class Month {
         this.weeks.add(week);
         for (int i = 1; i < MONTH_WEEK_NUMBER ; i++) {
             calendar.set(calendar.WEEK_OF_MONTH, i+1);
-
             week = new Week(calendar);
             this.weeks.add(week);
 

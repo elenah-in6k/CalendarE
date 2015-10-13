@@ -34,6 +34,7 @@ public class Day {
     public boolean isWeekendDay(Day day) {
         return day.setDayOfMonth() == (Calendar.SATURDAY & Calendar.SUNDAY);
     }
+
     public boolean isInMonth(Day day, int currentDay) {
         return (day.setDayOfMonth() == currentDay);
     }

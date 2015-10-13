@@ -28,9 +28,7 @@ public class Week {
             Day day = new Day(calendar.get(calendar.DAY_OF_MONTH), calendar.get(calendar.DAY_OF_WEEK));
             this.days.add(day);
             calendar.add(calendar.DAY_OF_MONTH, 1);
-
             System.out.println(day.dayOfMonth);
-  
         }
 
 
