@@ -8,8 +8,11 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) throws NullPointerException {
+        Calendar calendar = Calendar.getInstance();
+        Month month = new Month(calendar.getTime());
 
-        displaySelectedMethod();
+        System.out.println(month.monthToString() + "");
+        //displaySelectedMethod();
 
     }
 
