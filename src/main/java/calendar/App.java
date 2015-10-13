@@ -9,12 +9,19 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) throws NullPointerException {
-        try{
-            displaySelectedMethod();
-        }catch (IOException ex) {
 
-            System.out.println(ex.getMessage());
-        }
+        Calendar calendar = Calendar.getInstance();
+        Month month = new Month();
+        month.getMonth();
+
+        System.out.println(month.getMonth());
+
+//        try{
+//            displaySelectedMethod();
+//        }catch (IOException ex) {
+//
+//            System.out.println(ex.getMessage());
+//        }
 
     }
 
