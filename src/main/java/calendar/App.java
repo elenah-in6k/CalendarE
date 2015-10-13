@@ -3,6 +3,7 @@ package calendar;
 import java.io.*;
 import java.lang.String;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -12,17 +13,17 @@ public class App {
 
         Calendar calendar = Calendar.getInstance();
         Month month = new Month();
-        month.fillWeeks();
-//        String res = "";
-//        Iterator iter = month.weeks.iterator();
-//        for(int i = 0; iter.hasNext(); i++) {
-//
-//               Week resss = new Week();
-//             resss.days = iter.next();
-//
-//        }
-//        System.out.println( res);
-        System.out.println("\n"+month.toString());
+
+      String res = "";
+        Iterator<Week> iter = month.weeks.iterator();
+        for(int i = 0; iter.hasNext(); i++) {
+
+               Week resss = iter.next();
+           System.out.println( resss);
+
+        }
+
+       // System.out.println("\n"+month.toString());
 
 //        try{
 //            displaySelectedMethod();

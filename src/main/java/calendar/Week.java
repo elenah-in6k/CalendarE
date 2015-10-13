@@ -19,10 +19,10 @@ public class Week {
     public Week(Calendar calendar) {
         this.calendar = calendar;
         days = new ArrayList();
-        getDays();
+        fillDays();
     }
 
-    public void getDays() {
+    public void fillDays() {
 
         for (int i = 0; i < WEEK_SIZE; i++) {
             Day day = new Day(calendar.get(calendar.DAY_OF_MONTH), calendar.get(calendar.DAY_OF_WEEK));
