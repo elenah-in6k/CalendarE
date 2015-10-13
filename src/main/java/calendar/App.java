@@ -12,9 +12,17 @@ public class App {
 
         Calendar calendar = Calendar.getInstance();
         Month month = new Month();
-        month.getMonth();
-
-        System.out.println(month.getMonth());
+        month.fillWeeks();
+//        String res = "";
+//        Iterator iter = month.weeks.iterator();
+//        for(int i = 0; iter.hasNext(); i++) {
+//
+//               Week resss = new Week();
+//             resss.days = iter.next();
+//
+//        }
+//        System.out.println( res);
+        System.out.println("\n"+month.toString());
 
 //        try{
 //            displaySelectedMethod();

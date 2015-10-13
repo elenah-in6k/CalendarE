@@ -13,27 +13,27 @@ public class Week {
 
 
 
-    private List<Day> days;
+    public List<Day> days;
+    private Calendar calendar;
 
-    public Week() {
-
+    public Week(Calendar calendar) {
+        this.calendar = calendar;
         days = new ArrayList();
-
+        getDays();
     }
 
-    public List<Day> getDays(Calendar calendar) {
+    public void getDays() {
 
         for (int i = 0; i < WEEK_SIZE; i++) {
             Day day = new Day(calendar.get(calendar.DAY_OF_MONTH), calendar.get(calendar.DAY_OF_WEEK));
-            day.getDayOfMonth();
             this.days.add(day);
             calendar.add(calendar.DAY_OF_MONTH, 1);
 
             System.out.println(day.dayOfMonth);
-            System.out.println(day.isDayEquals(day));
+  
         }
 
-        return this.days;
+
     }
 
 

@@ -1,7 +1,6 @@
 package calendar;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by employee on 10/13/15.
@@ -12,31 +11,31 @@ public class Day {
     int dayOfMonth;
 
     public Day(int dayOfMonth, int dayOfWeek) {
-
-
         this.dayOfMonth = dayOfMonth;
         this.dayOfWeek = dayOfWeek;
+        setDayOfMonth();
+        setDayOfWeek();
     }
 
-    public int getDayOfMonth() {
+    private  int setDayOfMonth() {
 
         return dayOfMonth;
     }
 
-    public int getDayOfWeek() {
+    private int setDayOfWeek() {
 
         return dayOfWeek;
     }
 
     public boolean isWeekDay(Day day) {
-        return (day.getDayOfWeek() != (Calendar.SATURDAY | Calendar.SUNDAY));
+        return (day.setDayOfWeek() != (Calendar.SATURDAY | Calendar.SUNDAY));
     }
 
     public boolean isWeekendDay(Day day) {
-        return day.getDayOfMonth() == (Calendar.SATURDAY & Calendar.SUNDAY);
+        return day.setDayOfMonth() == (Calendar.SATURDAY & Calendar.SUNDAY);
     }
     public boolean isInMonth(Day day, int currentDay) {
-        return (day.getDayOfMonth() == currentDay);
+        return (day.setDayOfMonth() == currentDay);
     }
 
     public boolean isDayEquals(Day day){
