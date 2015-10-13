@@ -4,6 +4,7 @@ import java.io.*;
 import java.lang.String;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -13,15 +14,8 @@ public class App {
 
         Calendar calendar = Calendar.getInstance();
         Month month = new Month();
+        Printer printer = new ANSI_Printer(System.out);
 
-      String res = "";
-        Iterator<Week> iter = month.weeks.iterator();
-        for(int i = 0; iter.hasNext(); i++) {
-
-               Week resss = iter.next();
-           System.out.println( resss);
-
-        }
 
        // System.out.println("\n"+month.toString());
 

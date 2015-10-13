@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Month {
     public static final int MONTH_WEEK_NUMBER = 5;
+    public static final int WORK_WEEK_SIZE = 5;
     public List<Week> weeks;
 
     public Month() {
@@ -17,9 +18,11 @@ public class Month {
         fillWeeks();
     }
 
+    public List<Week> getWeeks(){
+        return this.weeks;
+    }
 
-
-    public void fillWeeks() {
+    private void fillWeeks() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.DAY_OF_MONTH, 1);
         calendar.set(calendar.DAY_OF_WEEK, calendar.get(calendar.MONDAY));
