@@ -1,5 +1,7 @@
 package calendar;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -8,14 +10,14 @@ import java.util.TimeZone;
  */
 public class Day {
 
-    int dayOfWeek;
+    DayOfWeek dayOfWeek;
     int dayOfMonth;
     int monthNumber;
 
-    public Day(Calendar calendar) {
-        this.dayOfMonth = calendar.get(calendar.DAY_OF_MONTH);
-        this.dayOfWeek = calendar.get(calendar.DAY_OF_WEEK);
-        this.monthNumber = calendar.get(calendar.MONTH);
+    public Day(LocalDate localDate) {
+        this.dayOfMonth = localDate.getDayOfMonth();
+        this.dayOfWeek = localDate.getDayOfWeek();
+        this.monthNumber = localDate.getMonthValue();
         getDayOfMonth();
         getDayOfWeek();
     }
@@ -25,24 +27,24 @@ public class Day {
         return dayOfMonth;
     }
 
-    private int getDayOfWeek() {
+    private DayOfWeek getDayOfWeek() {
 
         return dayOfWeek;
     }
 
     public boolean isWeekendDay() {
-        return (this.dayOfWeek == (Calendar.SATURDAY)) || (this.dayOfWeek == Calendar.SUNDAY);
+        return (this.dayOfWeek == DayOfWeek.SATURDAY) || (this.dayOfWeek == DayOfWeek.SUNDAY);
     }
 
     public boolean isInMonth() {
-        Calendar calendar = Calendar.getInstance();
-        return this.monthNumber == calendar.get(Calendar.MONTH);
+        LocalDate calendar = LocalDate.now();
+        return this.monthNumber == calendar.getMonthValue();
 
     }
 
     public boolean isDayEquals(){
-        Calendar currentCalendar = Calendar.getInstance();
-        return (this.dayOfMonth == currentCalendar.get(currentCalendar.DAY_OF_MONTH));
+        LocalDate currentCalendar = LocalDate.now();
+        return (this.dayOfMonth == currentCalendar.getDayOfMonth());
     }
 
 }

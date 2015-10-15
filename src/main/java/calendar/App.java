@@ -14,10 +14,11 @@ public class App {
 
         Calendar calendar = Calendar.getInstance();
         Month month = new Month();
-        PrintStream printStream = new PrintStream(System.out);
-        AbstractPrinter printer = new ANSI_Printer(printStream);
+        month.getWeeks();
+//        PrintStream printStream = new PrintStream(System.out);
+//        AbstractPrinter printer = new ANSI_Printer(printStream);
 
-        printer.printCalendar();
+        //printer.printCalendar();
        // System.out.println("\n"+month.toString());
 
 //        try{
@@ -29,13 +30,13 @@ public class App {
 
     }
 
-    private static void displaySelectedMethod() throws FileNotFoundException {
-        int placeOfOutput = chooseDisplayMethod();
-        MonthCalendar cal = new MonthCalendar();
-
-        Printer printer = placeOfOutput == 1 ? new PrinterConsole(System.out) : new PrinterHTML(new File("MonthCalendar.HTML"));
-        printer.printCalendar(cal);
-    }
+//    private static void displaySelectedMethod() throws FileNotFoundException {
+//        int placeOfOutput = chooseDisplayMethod();
+//        MonthCalendar cal = new MonthCalendar();
+//
+//        AbstractPrinter printer = placeOfOutput == 1 ? new ANSI_Printer(System.out) : new HTML_Printer("MonthCalendar.HTML");
+//        printer.printCalendar();
+//    }
 
     private static int chooseDisplayMethod() {
         Scanner in = new Scanner(System.in);
@@ -47,10 +48,15 @@ public class App {
         return in.nextInt();
     }
 
-    private static void saveCalendarInFile(String fileName, MonthCalendar calendar){
+    private static void saveCalendarInFile(String fileName){
         File file = new File(fileName);
-        try (PrintStream calendarStream = new PrintStream(file)) {
-            calendarStream.print(calendar);
+
+
+        try(FileOutputStream fos=new FileOutputStream(file);
+            PrintStream printStream = new PrintStream(fos))
+        {
+            printStream.println();
+
 
         } catch (IOException ex) {
 
