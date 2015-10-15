@@ -31,7 +31,7 @@ public class Day {
     }
 
     public boolean isWeekendDay() {
-        return this.dayOfWeek == (Calendar.SATURDAY & Calendar.SUNDAY);
+        return (this.dayOfWeek == (Calendar.SATURDAY)) || (this.dayOfWeek == Calendar.SUNDAY);
     }
 
     public boolean isInMonth() {

@@ -14,9 +14,10 @@ public class App {
 
         Calendar calendar = Calendar.getInstance();
         Month month = new Month();
-        Printer printer = new ANSI_Printer(System.out);
+        PrintStream printStream = new PrintStream(System.out);
+        AbstractPrinter printer = new ANSI_Printer(printStream);
 
-
+        printer.printCalendar();
        // System.out.println("\n"+month.toString());
 
 //        try{

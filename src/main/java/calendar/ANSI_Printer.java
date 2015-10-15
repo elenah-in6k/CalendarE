@@ -18,7 +18,7 @@ public class ANSI_Printer extends AbstractPrinter {
     ANSI_Printer(PrintStream printStream) {
         super(printStream);
 
-    }
+        }
 
 
     protected void printDay(Day day){

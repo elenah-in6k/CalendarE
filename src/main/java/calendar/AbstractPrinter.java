@@ -12,6 +12,7 @@ abstract class AbstractPrinter {
     public ColorSchema colorSchema;
     PrintStream printStream;
     String[] weekdayNames;
+
     AbstractPrinter(PrintStream printStream){
         this.printStream = printStream;
 
