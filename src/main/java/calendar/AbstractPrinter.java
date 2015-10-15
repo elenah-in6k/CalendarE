@@ -9,11 +9,12 @@ import java.util.Locale;
  * Created by employee on 10/13/15.
  */
 abstract class AbstractPrinter {
-    public ColorSchema colorSchema;
+
     PrintStream printStream;
     String[] weekdayNames;
 
-    AbstractPrinter(PrintStream printStream){
+    AbstractPrinter(PrintStream printStream) {
+
         this.printStream = printStream;
 
     }
@@ -30,21 +31,21 @@ abstract class AbstractPrinter {
 
     protected abstract void printDayOfWeekTitle(String weekdayName, int i);
 
-    void printCalendar(){
-        Month month = new Month();
+    void printCalendar(Month month) {
+
+        openMonth();
         printCalendarHeader();
         List<Week> weeks = month.getWeeks();
-        openMonth();
         for (Week week : weeks) {
             openWeek();
             for (Day day : week.getDays()) {
                 printDay(day);
             }
             closeWeek();
-
         }
         closeMonth();
     }
+
     public String getHeaderColor(int dayOfWeek, ColorSchema colorSchema1) {
 
         return ((dayOfWeek <= Month.WORK_WEEK_SIZE)) ? colorSchema1.getCurrentMonthColor() : colorSchema1.getWeekendColor();
@@ -58,7 +59,6 @@ abstract class AbstractPrinter {
         }
         closeWeek();
     }
-
 
 
     protected String getBodyColor(Day day, ColorSchema colorSchema) {

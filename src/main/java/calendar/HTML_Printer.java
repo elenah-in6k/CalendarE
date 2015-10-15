@@ -3,7 +3,7 @@ package calendar;
 import java.io.PrintStream;
 
 /**
- * Created by employee on 10/13/15.
+ * Created by Алена on 10/13/15.
  */
 public class HTML_Printer extends AbstractPrinter {
 
@@ -40,18 +40,18 @@ public class HTML_Printer extends AbstractPrinter {
     @Override
     protected void closeMonth() {
         printStream.print("\n</tr>\n");
-       printStream.print("</table>\n</BODY>\n</HTML>\n");
+        printStream.print("</table>\n</BODY>\n</HTML>\n");
     }
 
     @Override
     protected void printDay(Day day) {
-        printStream.print("<td>\n" + "<font color=" + getBodyColor(day, colorSchema) + ">" +
+        printStream.print("<td>\n" + "\t" + "<font color=" + getBodyColor(day, colorSchema) + ">" +
                 day.dayOfMonth + "</font>\n" + "</td>\n");
     }
 
     @Override
     protected void printDayOfWeekTitle(String weekdayName, int i) {
         printStream.print("<td>\n" + "<font color=" + getHeaderColor(i, colorSchema) + ">" +
-               weekdayName + "</font>\n" + "</td>\n");
+                weekdayName + "</font>\n" + "</td>\n");
     }
 }

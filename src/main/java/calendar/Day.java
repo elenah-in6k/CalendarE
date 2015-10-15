@@ -2,8 +2,7 @@ package calendar;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.TimeZone;
+
 
 /**
  * Created by employee on 10/13/15.
@@ -22,7 +21,7 @@ public class Day {
         getDayOfWeek();
     }
 
-    private  int getDayOfMonth() {
+    private int getDayOfMonth() {
 
         return dayOfMonth;
     }
@@ -42,7 +41,7 @@ public class Day {
 
     }
 
-    public boolean isDayEquals(){
+    public boolean isDayEquals() {
         LocalDate currentCalendar = LocalDate.now();
         return (this.dayOfMonth == currentCalendar.getDayOfMonth());
     }

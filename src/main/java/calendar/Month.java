@@ -7,48 +7,47 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
+//import java.time.Month;
 
 /**
  * Created by employee on 10/13/15.
  */
 public class Month {
-    public static final int MONTH_WEEK_NUMBER = 5;
     public static final int WORK_WEEK_SIZE = 5;
     public List<Week> weeks;
 
+    public java.time.Month month;
+
     public Month() {
-           this.weeks = new ArrayList();
+        this.weeks = new ArrayList();
+
         fillWeeks();
     }
 
-    public List<Week> getWeeks(){
+    public List<Week> getWeeks() {
+
         return this.weeks;
     }
 
     private void fillWeeks() {
         LocalDate localDate = LocalDate.now();
-        localDate = localDate.withDayOfMonth(1);
-        while (localDate.getDayOfWeek()!= DayOfWeek.MONDAY) {
-            localDate =  localDate.minusDays(1);
-        }
+        month = localDate.getMonth();
+        localDate = rollbackInMonday(localDate);
 
-        System.out.println(localDate.getMonth() );
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.DAY_OF_MONTH, 1);
-        calendar.set(calendar.DAY_OF_WEEK, calendar.get(calendar.MONDAY));
-       // System.out.println(calendar.get(calendar.WEEK_OF_MONTH)+" "+calendar.get(calendar.DAY_OF_WEEK)+" "+calendar.get(calendar.DAY_OF_MONTH));
-        Week week = new Week(localDate);
-
-        this.weeks.add(week);
-        for (int i = 1; i < MONTH_WEEK_NUMBER ; i++) {
-           week = new Week(localDate);
+        do {
+            Week week = new Week(localDate);
             localDate = localDate.plusWeeks(1);
             this.weeks.add(week);
+        } while (localDate.getMonth() == month);
 
+    }
 
+    private LocalDate rollbackInMonday(LocalDate localDate) {
+        localDate = localDate.withDayOfMonth(1);
+        while (localDate.getDayOfWeek() != DayOfWeek.MONDAY) {
+            localDate = localDate.minusDays(1);
         }
-
-
+        return localDate;
     }
 
 }
