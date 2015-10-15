@@ -9,35 +9,25 @@ import java.util.List;
  * Created by employee on 10/13/15.
  */
 public class Week {
-    public static final int WEEK_SIZE = 7;
 
-    public List<Day> days;
+    public List<Day> days = new ArrayList();;
 
-    private LocalDate localDate;
+    private LocalDate dayOfWeek;
 
-    public Week(LocalDate localDate) {
+    public Week(LocalDate firstDayOfWeek) {
+        this.dayOfWeek = firstDayOfWeek;
 
-        this.localDate = localDate;
-        days = new ArrayList();
         fillDays();
     }
 
     public List<Day> getDays() {
-
         return this.days;
     }
 
     public void fillDays() {
-
         do {
-            Day day = new Day(localDate);
-            this.days.add(day);
-            localDate = localDate.plusDays(1);
-            //System.out.println(day.dayOfMonth);
-        } while (!(localDate.getDayOfWeek() == DayOfWeek.MONDAY));
-
-
+            days.add(new Day(dayOfWeek));
+            dayOfWeek = dayOfWeek.plusDays(1);
+        } while (dayOfWeek.getDayOfWeek() != DayOfWeek.MONDAY);
     }
-
-
 }

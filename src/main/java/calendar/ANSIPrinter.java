@@ -5,7 +5,7 @@ import java.io.PrintStream;
 /**
  * Created by employee on 10/13/15.
  */
-public class ANSI_Printer extends AbstractPrinter {
+public class ANSIPrinter extends AbstractPrinter {
 
     String weekendColor = "[31m";
     String otherMonthColor = "[37m";
@@ -15,14 +15,19 @@ public class ANSI_Printer extends AbstractPrinter {
     public ColorSchema colorSchema = new ColorSchema(weekendColor, otherMonthColor, currentDayColor, currentMonthColor);
 
 
-    ANSI_Printer(PrintStream printStream) {
+    ANSIPrinter(PrintStream printStream) {
         super(printStream);
 
     }
 
 
     protected void printDay(Day day) {
-        printStream.print("\t" + (char) 27 + getBodyColor(day, this.colorSchema) + day.dayOfMonth);
+        String printString = "\t";
+        printString += (char) 27;
+        printString += getBodyColor(day, this.colorSchema);
+        printString += day.dayOfMonth;
+
+        printStream.print(printString);
     }
 
     protected void printDayOfWeekTitle(String weekdayName, int i) {
@@ -30,19 +35,19 @@ public class ANSI_Printer extends AbstractPrinter {
 
     }
 
-    protected void openWeek() {
+    protected void printOpenWeekToken() {
 
     }
 
-    protected void closeWeek() {
+    protected void printCloseWeekToken() {
         printStream.print("\n");
     }
 
-    protected void openMonth() {
+    protected void printOpenMonthToken() {
 
     }
 
-    protected void closeMonth() {
+    protected void printCloseMonthToken() {
 
     }
 }

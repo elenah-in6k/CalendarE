@@ -5,7 +5,7 @@ import java.io.PrintStream;
 /**
  * Created by Алена on 10/13/15.
  */
-public class HTML_Printer extends AbstractPrinter {
+public class HTMLPrinter extends AbstractPrinter {
 
     String weekendColor = "#FF0000";
     String otherMonthColor = "#C0C0C0";
@@ -13,23 +13,23 @@ public class HTML_Printer extends AbstractPrinter {
     String currentMonthColor = "#000000";
     public ColorSchema colorSchema = new ColorSchema(weekendColor, otherMonthColor, currentDayColor, currentMonthColor);
 
-    HTML_Printer(PrintStream printStream) {
+    HTMLPrinter(PrintStream printStream) {
         super(printStream);
     }
 
     @Override
-    protected void openWeek() {
+    protected void printOpenWeekToken() {
         printStream.print("<tr>\n");
     }
 
     @Override
-    protected void closeWeek() {
+    protected void printCloseWeekToken() {
         printStream.print("</tr>\n");
 
     }
 
     @Override
-    protected void openMonth() {
+    protected void printOpenMonthToken() {
         printStream.print("<HTML>\n<HEAD>\n<TITLE>\n" +
                 "MonthCalendar\n</TITLE>\n  " +
                 "</HEAD>\n<BODY>\n" +
@@ -38,7 +38,7 @@ public class HTML_Printer extends AbstractPrinter {
     }
 
     @Override
-    protected void closeMonth() {
+    protected void printCloseMonthToken() {
         printStream.print("\n</tr>\n");
         printStream.print("</table>\n</BODY>\n</HTML>\n");
     }

@@ -3,43 +3,35 @@ package calendar;
 import java.io.*;
 import java.lang.String;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 
 public class App {
-    public static final int firstPrinter = 1;
+    public static final int ANSI_PRINTER = 1;
 
-    public static void main(String[] args) throws NullPointerException, FileNotFoundException {
-
-
-        displaySelectedMethod();
-
+    public static void main(String[] args) throws NullPointerException, FileNotFoundException, IOException {
+        App app = new App();
+        app.run();
     }
 
-    private static void displaySelectedMethod() throws FileNotFoundException {
+    private void run()  throws NullPointerException, FileNotFoundException, IOException{
         int placeOfOutput = chooseDisplayMethod();
 
         Month month = new Month();
-        AbstractPrinter printer = placeOfOutput == firstPrinter ? new ANSI_Printer(System.out) : printInHtmlFile(month);
+
+        AbstractPrinter printer = (placeOfOutput == ANSI_PRINTER) ? new ANSIPrinter(System.out) : createHTMLPrinter();
         printer.printCalendar(month);
     }
 
-    private static AbstractPrinter printInHtmlFile(Month month) {
-        AbstractPrinter printer = new ANSI_Printer(System.out);
 
-        try (PrintStream printStream = new PrintStream("MonthCalendar.HTML")) {
-            printer = new HTML_Printer(printStream);
-            printer.printCalendar(month);
-        } catch (IOException ex) {
+    private HTMLPrinter createHTMLPrinter() throws IOException {
+        PrintStream printStream = new PrintStream("MonthCalendar.HTML");
+        HTMLPrinter printer = new HTMLPrinter(printStream);
 
-            System.out.println(ex.getMessage());
-        }
         return printer;
     }
 
-    private static int chooseDisplayMethod() {
+    private int chooseDisplayMethod() {
         Scanner in = new Scanner(System.in);
         Calendar c = Calendar.getInstance();
         System.out.println("DATE: " + c.getTime());

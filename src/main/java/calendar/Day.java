@@ -17,18 +17,7 @@ public class Day {
         this.dayOfMonth = localDate.getDayOfMonth();
         this.dayOfWeek = localDate.getDayOfWeek();
         this.monthNumber = localDate.getMonthValue();
-        getDayOfMonth();
-        getDayOfWeek();
-    }
 
-    private int getDayOfMonth() {
-
-        return dayOfMonth;
-    }
-
-    private DayOfWeek getDayOfWeek() {
-
-        return dayOfWeek;
     }
 
     public boolean isWeekendDay() {
@@ -41,7 +30,7 @@ public class Day {
 
     }
 
-    public boolean isDayEquals() {
+    public boolean isCurrentDay() {
         LocalDate currentCalendar = LocalDate.now();
         return (this.dayOfMonth == currentCalendar.getDayOfMonth());
     }
